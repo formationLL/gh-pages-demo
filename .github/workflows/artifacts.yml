@@ -1,4 +1,4 @@
-name: Deploy React App
+name: Artifatcs React App
 permissions:
   contents: write
 on:
