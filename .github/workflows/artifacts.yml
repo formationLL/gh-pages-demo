@@ -16,49 +16,23 @@ jobs:
       - name: Install
         run: npm install
       - name: Test
-        run: npm run test
-      - name: Archive production artifacts
+        run: npm run test > test.txt
+      - name: Upload Test
         uses: actions/upload-artifact@v3
         with:
-          name: build-without-png
-          path: |
-            build
-            !build/**/*.png
-  build:
+          name: testing
+          path: test.txt
+  download-test:
+    name: Download Test
     runs-on: ubuntu-latest
+    needs: test
     steps:
-      - name: Code
-        uses: actions/checkout@v3
-      - name: Install Node v18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install
-        run: npm install
-      - name: Build
-        run: npm run build
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Code
-        uses: actions/checkout@v3
-      - name: Install Node v18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Download a artifact
+      - name: DownloadTest
         uses: actions/download-artifact@v3
         with:
-          name: build-artifact
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        with:
-          folder: build
-          branch: gh-pages
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          name: testing
+      - name: Print result
+        shell: bash
+        run: |
+          value=`cat test.txt`
+          echo $value
