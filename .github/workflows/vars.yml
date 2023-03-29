@@ -1,6 +1,8 @@
 name: Vars React App
 on:
   workflow_dispatch:
+env:
+  TOP_VAR: top_vars  
 jobs:
   vars:
     name: echo Vars
@@ -10,15 +12,10 @@ jobs:
         env:
           MA_VAR: Ma variable
           REPO: ${{ github.repository }}
-          ACCESS_TOKEN: ${{ vars.ACCESS_TOKEN }}
-          ENV: ${{ vars.ENV_VARS_EXAMPLE }}
-          PATH: ${{ secrets.PATH }}
-          DB_TYPE: ${{ vars.DB_TYPE }}
+          DB_PASSWORD: 123456789
         shell: bash
         run: |
+          echo $TOP_VAR  
           echo $MA_VAR  
           echo $REPO
-          echo $ACCESS_TOKEN
-          echo $ENV
-          echo $PATH
-          echo $DB_TYPE
+          echo $DB_PASSWORD
