@@ -11,7 +11,7 @@ jobs:
           MA_VAR: Ma variable
           REPO: ${{ github.repository }}
           ACCESS_TOKEN: ${{ vars.ACCESS_TOKEN }}
-          ENV: ${{ vars.ENV }}
+          ENV: ${{ vars.ENV_VARS_EXAMPLE }}
           PATH: ${{ secrets.PATH }}
           DB_TYPE: ${{ vars.DB_TYPE }}
         shell: bash
