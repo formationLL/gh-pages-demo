@@ -1,4 +1,4 @@
-name: Artifacts React App
+name: Deploy React App
 permissions:
   contents: write
 on:
@@ -20,17 +20,11 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: dist-without-markdown
+          name: build-without-png
           path: |
-            dist
-            !dist/**/*.md
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-coverage-report
-          path: output/test/code-coverage.html
-  deploy:
-    needs: test
+            build
+            !build/**/*.png
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Code
@@ -43,10 +37,24 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Download a single artifact
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code
+        uses: actions/checkout@v3
+      - name: Install Node v18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Download a artifact
         uses: actions/download-artifact@v3
         with:
-          name: build-version
+          name: build-artifact
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
