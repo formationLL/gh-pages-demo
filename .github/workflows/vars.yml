@@ -1,21 +1,26 @@
 name: Vars React App
 on:
   workflow_dispatch:
-env:
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
-  MA_VAR: Ma variable
 jobs:
   vars:
     name: echo Vars
     runs-on: ubuntu-latest
     steps:
       - name: Print result
+        env:
+          env_var: ${{ vars.ENV_CONTEXT_VAR }}
+          MA_VAR: Ma variable
+          REPO: ${{ github.repository }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          PATH: ${{ secrets.PATH }}
+          ENV: ${{ env.ENV }}
+          DB_TYPE: ${{ env.DB_TYPE }}
         shell: bash
         run: |
-          echo "Env : ${{ vars.MA_VAR }}"  
-          echo "Env : ${{ vars.ENV_CONTEXT_VAR }}"  
-          echo "Repository : ${{ github.repository }}"  
-          echo "Secrets : ${{ secrets.ACCESS_TOKEN }}"
-          echo "Secrets : ${{ secrets.PATH }}"
-          echo "Env :  ${{ env.ENV }}"
-          echo "Env :  ${{ env.DB_TYPE }}"
+          echo $MA_VAR  
+          echo $env_var
+          echo $REPO
+          echo $ACCESS_TOKEN
+          echo $PATH
+          echo $ENV
+          echo $DB_TYPE
