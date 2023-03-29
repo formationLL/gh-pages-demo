@@ -1,6 +1,8 @@
 name: Vars React App
 on:
   workflow_dispatch:
+env:
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 jobs:
   vars:
     name: echo Vars
@@ -9,6 +11,7 @@ jobs:
       - name: Print result
         shell: bash
         run: |
+          echo "Env : ${{ vars.ENV_CONTEXT_VAR }}"  
           echo "Repository : ${{ github.repository }}"  
           echo "Secrets : ${{ secrets.ACCESS_TOKEN }}"
           echo "Secrets : ${{ secrets.PATH }}"
