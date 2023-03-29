@@ -8,7 +8,6 @@ jobs:
     steps:
       - name: Print result
         env:
-          env_var: ${{ vars.ENV_CONTEXT_VAR }}
           MA_VAR: Ma variable
           REPO: ${{ github.repository }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -18,7 +17,6 @@ jobs:
         shell: bash
         run: |
           echo $MA_VAR  
-          echo $env_var
           echo $REPO
           echo $ACCESS_TOKEN
           echo $PATH
