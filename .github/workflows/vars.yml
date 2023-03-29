@@ -10,15 +10,15 @@ jobs:
         env:
           MA_VAR: Ma variable
           REPO: ${{ github.repository }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ vars.ACCESS_TOKEN }}
+          ENV: ${{ vars.ENV }}
           PATH: ${{ secrets.PATH }}
-          ENV: ${{ env.ENV }}
-          DB_TYPE: ${{ env.DB_TYPE }}
+          DB_TYPE: ${{ vars.DB_TYPE }}
         shell: bash
         run: |
           echo $MA_VAR  
           echo $REPO
           echo $ACCESS_TOKEN
-          echo $PATH
           echo $ENV
+          echo $PATH
           echo $DB_TYPE
