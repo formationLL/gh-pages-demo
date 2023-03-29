@@ -1,0 +1,15 @@
+name: Vars React App
+on:
+  workflow_dispatch:
+jobs:
+  vars:
+    name: echo Vars
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print result
+        shell: bash
+        run: |
+          echo "Secrets : ${{ secrets.ACCESS_TOKEN }}"
+          echo "Secrets : ${{ secrets.PATH }}"
+          echo "Env :  ${{ env.ENV }}"
+          echo "Env :  ${{ env.DB_TYPE }}"
