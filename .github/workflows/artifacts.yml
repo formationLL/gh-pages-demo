@@ -30,7 +30,7 @@ jobs:
           name: code-coverage-report
           path: output/test/code-coverage.html
   deploy:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Code
