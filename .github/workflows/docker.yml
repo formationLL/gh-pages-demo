@@ -19,13 +19,3 @@ jobs:
         run: npm install
       - name: Test
         run: npm run test
-  php-test:
-    runs-on: ubuntu-latest
-    runs:
-      using: 'docker'
-      image: 'Dockerfile'
-    steps:
-      - name: Code
-        uses: actions/checkout@v3
-      - name: Install
-        run: echo php ./script.php
